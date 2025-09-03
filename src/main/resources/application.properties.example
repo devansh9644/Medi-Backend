@@ -1,15 +1,21 @@
 spring.application.name=Medilytics
-server.port=8080
 
-GEMINI_API_KEY
-spring.datasource.url = jdbc:mysql://localhost:3306/medilytics
-spring.datasource.username = root
-spring.datasource.password = 123456
+# Render provides PORT
+server.port=${PORT:8080}
 
+# Database (H2 for free demo, switch to Postgres later)
+spring.datasource.url=jdbc:h2:mem:medilytics
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
 
-openai.api.key
-spring.servlet.multipart.max-file-size = 20MB
-spring.servlet.multipart.max-request-size = 25MB
+# API keys (from Render Environment Variables)
+gemini.api.key=${GEMINI_API_KEY}
+openai.api.key=${OPENAI_API_KEY}
+
+# File upload
+spring.servlet.multipart.max-file-size=20MB
+spring.servlet.multipart.max-request-size=25MB
